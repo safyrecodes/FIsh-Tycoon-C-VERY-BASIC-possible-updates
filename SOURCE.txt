@@ -1,0 +1,156 @@
+
+#include <windows.h>
+#include <iostream>
+#include <random>
+#include <fstream>
+#include <cstdlib>
+#include <string>
+#include <stdlib.h>
+#include <vector>
+using namespace std;
+
+
+//Global Vars
+int money = 100;
+int fish = 1;
+int randfishy;
+int fishup;
+int lootboost;
+
+
+
+
+
+
+void data()
+{
+
+	ofstream myFile; //seting var
+	myFile.open("DATA.txt"); //opening file (will create if not created)
+
+	myFile << money << endl; //inputing data on line 1
+	myFile << fish << endl; //inputing data on line 2
+
+	myFile.close();
+	system("pause");
+	system("cls");
+
+
+}
+void datain() {
+	ifstream file;
+
+	file.open("DATA.txt");
+	file >> money;
+	file >> fish;
+
+
+	file.close();
+	system("cls");
+	system("color a");
+	
+	
+	
+
+}
+
+void randfish()
+{
+	auto rd = default_random_engine{ random_device{}() };
+	uniform_int_distribution<int> dist(1, 4);
+	cout << "You have caught " << dist(rd) << " fish" << endl;
+	fish += dist(rd);
+
+}
+
+void program()
+{
+
+	int choice;
+	system("Color B");
+	cout << "-                           _safyre                                          -" << endl;
+	cout << "-----------------------------------------------------------------------------" << endl;
+	cout << "- 1. BALANCE                                                                 -" << endl;
+	cout << "-                                                                            _" << endl;
+	cout << "- 2. SELL FISH                                                               - " << endl;
+	cout << "-                                                                            _" << endl;
+	cout << "- 3. CATCH FISH                                                              - " << endl;
+	cout << "-                                                                            -" << endl;
+	cout << "- 4. Save score to file                                                      -" << endl;
+	cout << "------------------------------------------------------------------------------" << endl;                                                         
+	cin >> choice;
+	if (choice == 1)
+	{
+		
+		cout << "Your Balance: " << money << endl;
+		system("pause");
+		system("CLS");
+		program();
+	}
+	else if (choice == 2) {
+
+		if (fish > 0)
+		{
+			fish -= 1;
+			cout << "You have sold 1 fish for $10" << endl;
+			cout ;
+			cout << "You now have " << fish << " fish " << endl;
+			money += 10;
+			cout ;
+			cout << "Your balance is " << money << endl;
+
+			system("pause");
+			system("CLS");
+			program();
+
+		}
+		else if (fish == 0)
+		{
+			cout << "You have no fish" << endl;
+			system("pause");
+			system("cls");
+			program();
+		}
+	}
+	else if (choice == 3)
+	{
+		randfish();
+		cout << "You now have " << fish << " fish " << endl;
+		system("pause");
+		system("CLS");
+		program();
+	}
+	else if (choice == 4)
+	{
+		data();
+		program();
+	}
+	else if (choice == 5) 
+	{
+		
+		program();
+
+
+	}
+	else {
+		cout << "Invaled error: 21072";
+		Sleep(3000);
+		system("cls");
+		program();
+		
+	}
+
+}
+
+
+
+
+int main()
+{
+
+	
+	datain();
+	program();
+	
+}
+
