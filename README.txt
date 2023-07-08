@@ -1,0 +1,1 @@
+please keep game in a folder to ensure all data from game is stored and not lost
